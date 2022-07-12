@@ -1,0 +1,39 @@
+######### Start Zookeeper #######
+zookeeper-server-start /opt/homebrew/etc/kafka/zookeeper.properties
+
+######### Start Kafka Server #######
+kafka-server-start /opt/homebrew/etc/kafka/server.properties
+
+
+### Kafka Topics ######
+kafka-topics --version
+
+kafka-topics --bootstrap-server localhost:9092 --create --topic first_topic --partitions 3
+
+kafka-topics --bootstrap-server localhost:9092 --create --topic third_topic --partitions 3 --replication-factor 1
+
+kafka-topics --bootstrap-server localhost:9092 --list
+
+kafka-topics --bootstrap-server localhost:9092 --describe
+
+kafka-topics --bootstrap-server localhost:9092 --delete --topic third_topic
+
+### Kafka Producer Commands #####
+
+kafka-topics --bootstrap-server localhost:9092 --describe
+
+kafka-console-producer --bootstrap-server localhost:9092 --topic first_topic --producer-property acks=all
+
+kafka-console-producer --bootstrap-server localhost:9092 --topic new_topic
+
+kafka-console-producer --bootstrap-server localhost:9092 --topic first_topic --property parse.key=true --property keys.separator=:
+
+##### Kafka Consumer Group commands on Topic #####
+kafka-console-consumer --bootstrap-server localhost:9092 --topic demo_java
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --group my-first-consumer-group
+
+kafka-consumer-groups --bootstrap-server localhost:9092 --describe
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --formatter kafka.tools.DefaultMessageFormatter --property print.timestamp=true 
+--property print.key=true --property print.value=true --from-beginning
