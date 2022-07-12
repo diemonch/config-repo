@@ -1,3 +1,10 @@
-## Install Mongo
+## Install & Verify Mongo Through Docker
 docker pull mongo:latest
 docker run -d -p 27017:27017 --name devMongoDB  mongo:latest
+docker exec -it devMongoDB bash
+root@7c03e826a049:/# mongo
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> 
